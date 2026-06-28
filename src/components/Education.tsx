@@ -15,7 +15,7 @@ type Level = {
 const LEVELS: Level[] = [
   {
     lvl: "01",
-    icon: "✈",
+    icon: "✈️",
     title: "Özyeğin Üniversitesi",
     sub: "Pilotaj / Aviation",
     status: "DEVAM EDIYOR",

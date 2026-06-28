@@ -14,7 +14,7 @@ export default function Stats() {
         {STATS.map((s, i) => (
           <Reveal key={s.l} delay={i * 100}>
             <div className="pixel-box text-center py-6 px-3 h-full">
-              <div className="h-2 w-10 mx-auto mb-3" style= background: s.c  />
+              <div className="h-2 w-10 mx-auto mb-3" style= backgroundColor: s.c  />
               <div className="font-pixel text-lg sm:text-xl">{s.v}</div>
               <div className="text-[11px] uppercase tracking-widest text-[#17140f]/60 mt-2">{s.l}</div>
             </div>

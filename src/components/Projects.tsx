@@ -56,7 +56,7 @@ export default function Projects() {
           {PROJECTS.map((p, i) => (
             <Reveal key={p.name} delay={i * 120}>
               <article className="proj-card pixel-box h-full flex flex-col">
-                <div className="h-2" style= background: p.color  />
+                <div className="h-2" style= backgroundColor: p.color  />
                 <div className="p-5 flex flex-col flex-1">
                   <div className="flex items-center justify-between gap-2">
                     <h3 className="font-bold text-lg text-[#17140f]">{p.name}</h3>
