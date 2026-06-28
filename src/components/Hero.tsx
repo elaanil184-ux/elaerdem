@@ -33,7 +33,7 @@ export default function Hero() {
           </a>
         </div>
 
-        <div className="reveal in" style= transitionDelay: "120ms" >
+        <div className="reveal in">
           <div
             className="pixel-box p-5 relative overflow-hidden"
             onMouseEnter={() => setSpeech("START HERE!")}
@@ -48,8 +48,8 @@ export default function Hero() {
 
             <div className="relative bg-[#eaf3ff] border-[3px] border-[#17140f] h-64 sm:h-72">
               <span className="anim-sparkle absolute top-5 left-8 text-[#2f6df6]">✦</span>
-              <span className="anim-sparkle absolute top-10 right-12 text-[#f4c534]" style= animationDelay: "0.6s" >✦</span>
-              <span className="anim-sparkle absolute top-20 left-1/2 text-[#e8453c]" style= animationDelay: "1.1s" >✧</span>
+              <span className="anim-sparkle absolute top-10 right-12 text-[#f4c534] [animation-delay:600ms]">✦</span>
+              <span className="anim-sparkle absolute top-20 left-1/2 text-[#e8453c] [animation-delay:1100ms]">✧</span>
 
               <div className="absolute top-4 right-4 pixel-box-sm px-2 py-1 font-pixel text-[8px]">{speech}</div>
 

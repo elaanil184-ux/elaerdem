@@ -19,7 +19,7 @@ const LEVELS: Level[] = [
     title: "Özyeğin Üniversitesi",
     sub: "Pilotaj / Aviation",
     status: "DEVAM EDIYOR",
-    statusColor: "#2f6df6",
+    statusColor: "text-[#2f6df6]",
     desc: "Havacılık disiplini, hızlı karar verme, sorumluluk ve operasyonel düşünme.",
     highlight: false,
   },
@@ -29,7 +29,7 @@ const LEVELS: Level[] = [
     title: "Bilgisayar Mühendisliği",
     sub: "Software & AI",
     status: "DEVAM EDIYOR",
-    statusColor: "#2fa457",
+    statusColor: "text-[#2fa457]",
     desc: "Yazılım geliştirme, algoritmalar, veri yapıları, backend sistemler, web ve yapay zeka.",
     highlight: true,
   },
@@ -39,7 +39,7 @@ const LEVELS: Level[] = [
     title: "İstanbul Üniversitesi",
     sub: "İşletme / Business",
     status: "MEZUN",
-    statusColor: "#e8453c",
+    statusColor: "text-[#e8453c]",
     desc: "İş geliştirme, girişimcilik ve kullanıcı odaklı düşünme.",
     highlight: false,
   },
@@ -65,10 +65,7 @@ export default function Education() {
                 </div>
                 <h3 className="font-bold text-lg mt-3 text-[#17140f]">{lv.title}</h3>
                 <p className="text-sm text-[#17140f]/60">{lv.sub}</p>
-                <span
-                  className="pixel-tag font-pixel text-[9px] px-2 py-1 mt-3"
-                  style= color: lv.statusColor 
-                >
+                <span className={`pixel-tag font-pixel text-[9px] px-2 py-1 mt-3 ${lv.statusColor}`}>
                   {lv.status}
                 </span>
                 <p className="text-sm text-[#17140f]/75 leading-relaxed mt-3">{lv.desc}</p>

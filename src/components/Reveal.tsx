@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -30,12 +31,10 @@ export default function Reveal({ children, className = "", delay = 0 }: Props) {
     return () => io.disconnect();
   }, []);
 
+  const style: CSSProperties = { transitionDelay: `${delay}ms` };
+
   return (
-    <div
-      ref={ref}
-      className={`reveal ${shown ? "in" : ""} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
+    <div ref={ref} className={`reveal ${shown ? "in" : ""} ${className}`} style={style}>
       {children}
     </div>
   );

@@ -3,7 +3,7 @@ import SectionHead from "@/components/SectionHead";
 
 type Project = {
   name: string;
-  color: string;
+  bar: string;
   desc: string;
   metrics: { v: string; l: string }[];
   tech: string[];
@@ -12,7 +12,7 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     name: "KatipÖzet",
-    color: "#2f6df6",
+    bar: "bg-[#2f6df6]",
     desc: "Yapay zeka destekli hukuki belge özetleme platformu. OCR ve hukuki hesaplama araçlarıyla iş yükünü azaltır.",
     metrics: [
       { v: "30.000+", l: "özet" },
@@ -22,7 +22,7 @@ const PROJECTS: Project[] = [
   },
   {
     name: "Miandela",
-    color: "#e8453c",
+    bar: "bg-[#e8453c]",
     desc: "Kişiselleştirilmiş dijital içerik ve etkileşimli ürün platformu. Kullanıcı deneyimi odaklı tasarım.",
     metrics: [
       { v: "UX", l: "odaklı" },
@@ -32,7 +32,7 @@ const PROJECTS: Project[] = [
   },
   {
     name: "Ucuz Uçak",
-    color: "#f4c534",
+    bar: "bg-[#f4c534]",
     desc: "Uçuş fırsatlarını ve uygun fiyatları bulmayı kolaylaştıran arama ve otomasyon platformu.",
     metrics: [
       { v: "Auto", l: "veri toplama" },
@@ -56,7 +56,7 @@ export default function Projects() {
           {PROJECTS.map((p, i) => (
             <Reveal key={p.name} delay={i * 120}>
               <article className="proj-card pixel-box h-full flex flex-col">
-                <div className="h-2" style= backgroundColor: p.color  />
+                <div className={`h-2 ${p.bar}`} />
                 <div className="p-5 flex flex-col flex-1">
                   <div className="flex items-center justify-between gap-2">
                     <h3 className="font-bold text-lg text-[#17140f]">{p.name}</h3>

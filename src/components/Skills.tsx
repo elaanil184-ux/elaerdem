@@ -1,5 +1,6 @@
 import Reveal from "@/components/Reveal";
 import SectionHead from "@/components/SectionHead";
+import type { CSSProperties } from "react";
 
 const SKILLS = [
   { n: "Python", p: 88, c: "#2f6df6" },
@@ -22,20 +23,21 @@ export default function Skills() {
         />
 
         <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6 mt-10">
-          {SKILLS.map((s, i) => (
-            <Reveal key={s.n} delay={i * 80}>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-bold text-[#17140f]">{s.n}</span>
-                <span className="font-pixel text-[10px] text-[#17140f]/60">{s.p}%</span>
-              </div>
-              <div className="skill-track">
-                <div
-                  className="skill-fill"
-                  style={{ ["--pct"]: `${s.p}%`, color: s.c } as React.CSSProperties}
-                />
-              </div>
-            </Reveal>
-          ))}
+          {SKILLS.map((s, i) => {
+            const fill: CSSProperties = { color: s.c };
+            (fill as Record<string, string>)["--pct"] = `${s.p}%`;
+            return (
+              <Reveal key={s.n} delay={i * 80}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-bold text-[#17140f]">{s.n}</span>
+                  <span className="font-pixel text-[10px] text-[#17140f]/60">{s.p}%</span>
+                </div>
+                <div className="skill-track">
+                  <div className="skill-fill" style={fill} />
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
