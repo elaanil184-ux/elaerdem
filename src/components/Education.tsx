@@ -1,109 +1,82 @@
-"use client";
+import Reveal from "@/components/Reveal";
+import SectionHead from "@/components/SectionHead";
 
-import { GraduationCap } from "lucide-react";
+type Level = {
+  lvl: string;
+  icon: string;
+  title: string;
+  sub: string;
+  status: string;
+  statusColor: string;
+  desc: string;
+  highlight: boolean;
+};
 
-const educationData = [
+const LEVELS: Level[] = [
   {
-    school: "Özyeğin Üniversitesi",
-    program: "Havayolu / Ticari / Profesyonel Pilotaj",
-    date: "2022 – Devam ediyor",
-    gpa: "3.95 / 4.00",
-    icon: "✈️",
-    badge: "Tam Burslu",
+    lvl: "01",
+    icon: "✈",
+    title: "Özyeğin Üniversitesi",
+    sub: "Pilotaj / Aviation",
+    status: "DEVAM EDIYOR",
+    statusColor: "#2f6df6",
+    desc: "Havacılık disiplini, hızlı karar verme, sorumluluk ve operasyonel düşünme.",
+    highlight: false,
   },
   {
-    school: "Özyeğin Üniversitesi",
-    program: "Çift Anadal · Bilgisayar Mühendisliği",
-    date: "2023 – Devam ediyor",
-    gpa: "3.96 / 4.00",
+    lvl: "02",
     icon: "💻",
-    badge: "Tam Burslu",
+    title: "Bilgisayar Mühendisliği",
+    sub: "Software & AI",
+    status: "DEVAM EDIYOR",
+    statusColor: "#2fa457",
+    desc: "Yazılım geliştirme, algoritmalar, veri yapıları, backend sistemler, web ve yapay zeka.",
+    highlight: true,
   },
   {
-    school: "İstanbul Üniversitesi",
-    program: "İşletme (Business Administration)",
-    date: "2023 – 2025",
-    gpa: "",
-    icon: "📊",
-    badge: "",
-  },
-  {
-    school: "InterCockpit Flight School Germany",
-    program: "Test Pilotu",
-    date: "",
-    gpa: "",
-    icon: "🇩🇪",
-    badge: "",
-  },
-  {
-    school: "TÜBİTAK — Project on Dynamics",
-    program: "İkincilik Ödülü",
-    date: "2016 – 2017",
-    gpa: "",
-    icon: "🏆",
-    badge: "İkincilik",
-  },
-  {
-    school: "Amerikan Kültür Derneği",
-    program: "Dil Eğitimi",
-    date: "2011 – 2016",
-    gpa: "",
-    icon: "🇺🇸",
-    badge: "",
-  },
-  {
-    school: "TED Rönesans Koleji",
-    program: "Lise · Maltepe, İstanbul",
-    date: "",
-    gpa: "",
-    icon: "🎓",
-    badge: "",
+    lvl: "03",
+    icon: "💼",
+    title: "İstanbul Üniversitesi",
+    sub: "İşletme / Business",
+    status: "MEZUN",
+    statusColor: "#e8453c",
+    desc: "İş geliştirme, girişimcilik ve kullanıcı odaklı düşünme.",
+    highlight: false,
   },
 ];
 
 export default function Education() {
   return (
-    <div id="egitim" className="h-full w-full flex flex-col justify-center overflow-y-auto py-16 md:py-0 relative">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 w-full mt-10">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-slate-800">
-            <GraduationCap className="w-6 h-6" />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Eğitim</h2>
-            <p className="text-sm text-slate-500">Akademik geçmişim ve derecelerim.</p>
-          </div>
-        </div>
+    <section id="egitim" className="scroll-mt-24 py-16 px-5 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <SectionHead
+          eyebrow="04 / TRAINING LOG"
+          title="Eğitim Yolculuğum"
+          desc="Pilotaj disipliniyle analitik düşünmeyi, bilgisayar mühendisliğiyle teknik üretimi, işletme eğitimiyle ürün ve kullanıcı odağını birleştiriyorum."
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-8 mt-6">
-          {educationData.map((item, index) => (
-            <div key={index} className="flex flex-col p-4 bg-slate-50 border border-slate-100 rounded-xl hover:bg-slate-100 transition-colors duration-200">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">{item.icon}</span>
-                  <h3 className="text-sm font-bold text-slate-900">{item.school}</h3>
+        <div className="grid md:grid-cols-3 gap-7 mt-10">
+          {LEVELS.map((lv, i) => (
+            <Reveal key={lv.lvl} delay={i * 120}>
+              <div className={`proj-card pixel-box h-full p-5 ${lv.highlight ? "bg-[#fff7d6]" : ""}`}>
+                <div className="flex items-center justify-between">
+                  <span className="font-pixel text-[10px] text-[#17140f]/50">LEVEL {lv.lvl}</span>
+                  <span className="text-2xl">{lv.icon}</span>
                 </div>
-                {item.date && <span className="text-[10px] font-medium text-slate-500">{item.date}</span>}
+                <h3 className="font-bold text-lg mt-3 text-[#17140f]">{lv.title}</h3>
+                <p className="text-sm text-[#17140f]/60">{lv.sub}</p>
+                <span
+                  className="pixel-tag font-pixel text-[9px] px-2 py-1 mt-3"
+                  style= color: lv.statusColor 
+                >
+                  {lv.status}
+                </span>
+                <p className="text-sm text-[#17140f]/75 leading-relaxed mt-3">{lv.desc}</p>
               </div>
-              
-              <p className="text-xs font-medium text-slate-600 mb-3 flex-1">{item.program}</p>
-              
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {item.badge && (
-                  <span className="text-[10px] font-bold text-slate-700 bg-white px-2 py-0.5 rounded border border-slate-200">
-                    {item.badge}
-                  </span>
-                )}
-                {item.gpa && (
-                  <span className="text-[10px] font-bold text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200 shadow-sm">
-                    Not: {item.gpa}
-                  </span>
-                )}
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,85 +1,111 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useEffect, useState } from "react";
+
+const LINKS = [
+  { href: "#hero", label: "Ana Sayfa" },
+  { href: "#projeler", label: "Projeler" },
+  { href: "#yetenekler", label: "Yetenekler" },
+  { href: "#egitim", label: "Eğitim" },
+  { href: "#iletisim", label: "İletişim" },
+];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollContainer = document.getElementById("main-scroll-container");
-      if (scrollContainer) {
-        setScrolled(scrollContainer.scrollTop > 20);
-      } else {
-        setScrolled(window.scrollY > 20);
-      }
-    };
-    
-    const scrollContainer = document.getElementById("main-scroll-container");
-    const target = scrollContainer || window;
-    
-    target.addEventListener('scroll', handleScroll, { passive: true });
-    return () => target.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const links = [
-    { href: "#hakkimda", label: "Hakkımda" },
-    { href: "#deneyim", label: "Deneyim" },
-    { href: "#projeler", label: "Projeler" },
-    { href: "#egitim", label: "Eğitim" },
-    { href: "#lisanslar", label: "Lisanslar" },
-    { href: "#yetenekler", label: "Yetenekler" },
-  ];
-
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const go = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    setIsOpen(false);
-    const el = document.getElementById(id.replace('#', ''));
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    setOpen(false);
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/90 backdrop-blur-md border-b border-slate-200/50 py-3 shadow-sm' : 'bg-transparent py-5'
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-200 ${
+        scrolled
+          ? "bg-[#f3eddd]/95 backdrop-blur border-b-[3px] border-[#17140f]"
+          : "border-b-[3px] border-transparent"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 flex justify-between items-center">
-        <Link href="/" className="text-xl font-black tracking-tighter text-slate-900 flex items-center gap-1">
-          ELA<span className="text-slate-400 font-medium">ERDEM</span>
-          <span className="w-2 h-2 rounded-full bg-slate-900 ml-0.5 mb-1"></span>
-        </Link>
+      <div className="max-w-6xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
+        <a href="#hero" onClick={(e) => go(e, "#hero")} className="flex items-center gap-3">
+          <span className="w-7 h-7 grid place-items-center bg-[#e8453c] border-[3px] border-[#17140f] text-white text-[10px] font-pixel">
+            E
+          </span>
+          <span className="leading-none">
+            <span className="block font-pixel text-sm tracking-tight">ELA ERDEM</span>
+            <span className="block text-[10px] tracking-[0.2em] text-[#17140f]/60 mt-1">
+              CODE • CREATE • PLAY
+            </span>
+          </span>
+        </a>
+
+        <nav className="hidden md:flex items-center gap-7">
+          {LINKS.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={(e) => go(e, l.href)}
+              className="nav-link text-[11px] font-bold uppercase tracking-widest text-[#17140f]/75 hover:text-[#17140f]"
+            >
+              {l.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="hidden md:flex items-center gap-3">
+          <span className="pixel-tag px-2 py-1 text-[10px] font-pixel gap-1">
+            <span className="w-2.5 h-2.5 bg-[#f4c534] border-2 border-[#17140f]" /> XP 3200
+          </span>
+          <a
+            href="https://www.linkedin.com/in/ela-erdem/"
+            target="_blank"
+            rel="noreferrer"
+            className="pixel-btn bg-[#2f6df6] text-white px-3 py-2 text-[10px] font-bold uppercase tracking-widest"
+          >
+            CV İndir
+          </a>
+        </div>
 
         <button
-          className="md:hidden text-slate-900 text-2xl focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setOpen(!open)}
+          className="md:hidden pixel-box-sm w-9 h-9 grid place-items-center text-lg"
           aria-label="Menü"
         >
-          {isOpen ? '✕' : '☰'}
+          {open ? "✕" : "☰"}
         </button>
+      </div>
 
-        <nav className={`md:flex items-center gap-8 ${isOpen ? 'absolute top-full left-0 w-full bg-white flex flex-col p-6 border-b border-slate-200 shadow-lg gap-4' : 'hidden'}`}>
-          {links.map((link) => (
+      {open ? (
+        <div className="md:hidden bg-[#f3eddd] border-b-[3px] border-[#17140f] px-5 py-4 flex flex-col gap-3">
+          {LINKS.map((l) => (
             <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => scrollToSection(e, link.href)}
-              className="text-xs font-bold text-slate-500 hover:text-slate-900 transition-colors duration-200 uppercase tracking-widest"
+              key={l.href}
+              href={l.href}
+              onClick={(e) => go(e, l.href)}
+              className="text-xs font-bold uppercase tracking-widest text-[#17140f]/80"
             >
-              {link.label}
+              {l.label}
             </a>
           ))}
           <a
-            href="#iletisim"
-            onClick={(e) => scrollToSection(e, "#iletisim")}
-            className="md:ml-2 px-5 py-2 text-xs font-bold text-white bg-slate-900 rounded-full hover:bg-slate-800 transition-colors duration-200 uppercase tracking-widest shadow-sm"
+            href="https://www.linkedin.com/in/ela-erdem/"
+            target="_blank"
+            rel="noreferrer"
+            className="pixel-btn bg-[#2f6df6] text-white px-3 py-2 text-[10px] font-bold uppercase tracking-widest w-max"
           >
-            İletişim
+            CV İndir
           </a>
-        </nav>
-      </div>
+        </div>
+      ) : null}
     </header>
   );
 }
